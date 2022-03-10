@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract MinimumViableERC20 is ERC20, Pausable {
+contract MinimumViableERC20 is ERC20, Pausable, Ownable {
   constructor(
     string memory name,
     string memory symbol,
@@ -14,11 +15,11 @@ contract MinimumViableERC20 is ERC20, Pausable {
     _mint(initialAccount, initialBalance);
   }
 
-  function mint(address account, uint256 amount) public {
+  function mint(address account, uint256 amount) public onlyOwner {
     _mint(account, amount);
   }
 
-  function burn(address account, uint256 amount) public {
+  function burn(address account, uint256 amount) public onlyOwner {
     _burn(account, amount);
   }
 
