@@ -9,6 +9,7 @@ contract UpgradeableMinimumViableERC20 is ERC20Upgradeable, PausableUpgradeable,
   function initialize() initializer public {
     __Ownable_init();
     __ERC20_init('name', 'symbol');
+    __Pausable_init();
   }
 
   function mint(address account, uint256 amount) public onlyOnwer {
